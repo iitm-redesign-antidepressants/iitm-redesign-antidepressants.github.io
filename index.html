@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>IIT Madras Degree Program in Data Science and Applications</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/output.css">
+  <script src="/assets/main.js" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v1.9.5/dist/alpine.js"></script>
+</head>
+
+<body class="font-body bg-zinc-50">
+  <div class="flex gap-0 fixed w-screen bg-zinc-50/90 z-20 before:backdrop-blur-lg before:absolute before:inset-0">
+    <div class="flex-1 m-4 z-10">
+      <img src="/static/IITMOD-Logo.svg" class="h-16 w-auto">
+    </div>
+
+    <!-- this element separates out into the bottom dock for mobile view -->
+    <div class="grid grid-cols-3 gap-2 fixed h-20 bottom-0 w-full
+      bg-white p-2 lg:px-0 lg:py-4 lg:bg-transparent
+      lg:flex lg:h-auto lg:w-auto lg:static z-20
+      shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)] lg:shadow-none
+      " id="dock">
+      <!-- menu trigger -->
+      <button id="menuOpen" class="flex-auto text-gray-700 justify-center flex items-center border-transparent hover:border-gray-300 border-2 px-4 rounded-lg gap-2
+      lg:scale-0 lg:absolute transition-translate duration-200
+      ">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="size-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+      </button>
+
+      <div id="searchModal" class="flex gap-4 flex-row mx-2 justify-center lg:w-96">
+        <!-- search trigger -->
+        <input id="search" class="border-2 absolute scale-0
+        lg:static lg:scale-100 lg:flex-1
+        border-gray-300 p-4 rounded-lg
+        transition-all duration-250" type="text" placeholder="Search"></input>
+        <button id="searchCloseButton" class="
+        lg:absolute lg:scale-0 text-gray-700
+        scale-0 absolute border-transparent
+        hover:border-gray-300 border-2 px-4 py-auto rounded-lg transition-opacity gap-2 duration-500
+      ">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+          </svg>
+        </button>
+        <button id="searchButton" class="lg:flex-none flex-auto flex items-center justify-center text-gray-700 border-transparent hover:border-gray-300 border-2 px-4 py-auto rounded-lg transition-[translate] gap-2 duration-500
+      ">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- language selector -->
+      <div
+        class="relative z-20 flex-auto lg:flex-none text-gray-700 flex items-center border-transparent hover:border-gray-300 border-2 rounded-lg transition-all duration-500">
+        <button id="languageSelector" class="flex gap-2 flex-auto px-4 h-full justify-center items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" />
+          </svg>
+          <div id="currentLanguage">
+            English
+          </div>
+        </button>
+        <div id="languages" tabindex='-1'
+          class="absolute border-[0.1rem] border-gray-200 scale-0 bg-white opacity-0 w-full lg:w-[200%] rounded-lg lg:shadow-[0_10px_40px_-15px_rgba(0,0,0,0.6)] shadow-lg transition-all duration-200 divide-y overflow-hidden">
+          <div class="p-4 hover:bg-gray-100 transition-all duration-200">
+            English
+          </div>
+          <div class="p-4 hover:bg-gray-100 transition-all duration-200">
+            हिंदी
+          </div>
+          <div class="p-4 hover:bg-gray-100 transition-all duration-200">
+            தமிழ்
+          </div>
+          <div class="p-4 hover:bg-gray-100 transition-all duration-200">
+            తెలుగు
+          </div>
+          <div class="p-4 hover:bg-gray-100 transition-all duration-200">
+            മലയാളം
+          </div>
+          <div class="p-4 hover:bg-gray-100 transition-all duration-200">
+            ಕನ್ನಡ
+          </div>
+          <div class="p-4 hover:bg-gray-100 transition-all duration-200">
+            मराठी
+          </div>
+          <div class="p-4 hover:bg-gray-100 transition-all duration-200">
+            ગુજરાતી
+          </div>
+          <div class="p-4 hover:bg-gray-100 transition-all duration-200">
+            বাংলা
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- sign in trigger -->
+    <button class="m-4 bg-secondary-100 border-secondary-200 border-2 font-bold text-gray-700 px-4 py-2 rounded-lg
+      hover:border-secondary-300 hover:shadow-md hover:shadow-secondary-500/50
+      active:scale-95 z-10
+      transition-all duration-500">
+      Sign in
+    </button>
+  </div>
+
+  <div class="lg:grid lg:grid-cols-8 lg:pb-0 pt-28">
+    <div id="menu" class="bg-zinc-50
+      text-gray-700 border-zinc-200 border-r-2 border-t-2 rounded-tr-lg
+      top-0
+      fixed w-full h-full overflow-y-scroll
+      lg:top-28 lg:sticky lg:sidebar lg:col-span-2 lg:translate-x-0
+      transition-all duration-250
+      py-24
+      lg:py-0
+      -translate-x-full z-10
+      ">
+      <!-- icons sourced from heroicons.com -->
+      <svg id="chevron-down" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+        stroke="currentColor" class="w-0 h-0">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+      </svg>
+
+      <div id="accordion" class="transition-all duration-200">
+        <button class="px-6 py-4 items-center w-full flex flex-row active:scale-[0.98] duration-200">
+          <div class="flex-1 text-left">
+            Academics
+          </div>
+          <svg class="size-6">
+            <use href="#chevron-down" />
+          </svg>
+        </button>
+        <div id="contents" class="bg-gray-200 pl-8 pr-4 rounded-l-lg grid grid-cols-1 divide-y divide-gray-300 transition-all duration-200
+          max-h-0 overflow-y-hidden
+          ">
+          <!-- wrap in an extra div for grouping items -->
+          <div>
+            <div class="py-4">
+              <a href="/academics/">
+                Overall Structure
+              </a>
+            </div>
+            <div class="py-4">
+              <a href="/academics/">
+                Term Structure
+              </a>
+            </div>
+            <div class="py-4">
+              <a href="/academics/">
+                Course Registrations
+              </a>
+            </div>
+            <div class="py-4">
+              <a href="/academics/">
+                Assessments
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <div class="py-4">
+              <a href="/academics/">
+                Exam Cities
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <div class="py-4">
+              <a href="/academics/">
+                Fee Structure
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <div class="py-4">
+              <a href="/academics/">
+                Foundation Level
+              </a>
+            </div>
+            <div class="py-4">
+              <a href="/academics/">
+                Diploma Level
+              </a>
+            </div>
+            <div class="py-4">
+              <a href="/academics/">
+                BSc Degree Level
+              </a>
+            </div>
+            <div class="py-4">
+              <a href="/academics/">
+                BS Degree Level
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <div class="py-4">
+              <a href="/academics/">
+                Sample Certificates
+              </a>
+            </div>
+          </div>
+
+          <div class="py-4">
+            <a href="/academics/">
+              Academic Calendar
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+      <div id="accordion" class="transition-all duration-200">
+        <button class="px-6 py-4 items-center w-full flex flex-row active:scale-[0.98] duration-200">
+          <div class="flex-1 text-left">
+            Admissions
+          </div>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+          </svg>
+        </button>
+        <div id="contents" class="bg-gray-200 pl-8 pr-4 rounded-l-lg grid grid-cols-1 divide-y divide-gray-300 transition-all duration-200
+          max-h-0 overflow-y-hidden
+          ">
+          <div>
+            <div class="py-4">
+              <a href="/admissions/">
+                Important Dates
+            </div>
+            <div class="py-4">
+              <a href="/admissions/">
+                Mandatory Requirements
+            </div>
+          </div>
+
+          <div>
+            <div class="py-4">
+              <a href="/admissions/">
+                Eligibility to Apply
+              </a>
+            </div>
+            <div class="py-4">
+              <a href="/admissions/">
+                Application Process
+              </a>
+            </div>
+            <div class="py-4">
+              <a href="/admissions/">
+                Admission to the Foundation Level
+              </a>
+            </div>
+            <div class="py-4">
+              <a href="/admissions/">
+                Regular Entry
+              </a>
+            </div>
+            <div class="py-4">
+              <a href="/admissions/">
+                JEE-based Entry
+              </a>
+            </div>
+          </div>
+
+          <div class="py-4">
+            <a href="/admissions/">
+              International Students
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div id="accordion" class="transition-all duration-200">
+        <button class="px-6 py-4 items-center w-full flex flex-row active:scale-[0.98] duration-200">
+          <div class="flex-1 text-left">
+            About IITM
+          </div>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+          </svg>
+        </button>
+        <div id="contents" class="bg-gray-200 pl-8 pr-4 rounded-l-lg grid grid-cols-1 divide-y divide-gray-300 transition-all duration-200
+          max-h-0 overflow-y-hidden
+          ">
+          <div>
+            <div class="py-4">
+              <a href="/about/">
+                About IIT Madras
+              </a>
+            </div>
+            <div class="py-4">
+              <a href="/about/">
+                Faculty Co-ordinators
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <div class="py-4">
+              <a href="/about/">
+                Contact Us
+              </a>
+            </div>
+            <div class="py-4">
+              <a href="/about/">
+                Merchandise
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="accordion" class="transition-all duration-200">
+        <button class="px-6 py-4 items-center w-full flex flex-row active:scale-[0.98] duration-200">
+          <div class="flex-1 text-left">
+            <a href="/partnerships/">
+              Partnerships
+            </a>
+          </div>
+        </button>
+      </div>
+
+    </div>
+    <div class="lg:col-span-6 lg:col-start-3">
+      <div class="ml-4 flex bg-primary-700 text-white p-4 flex-row gap-5 rounded-l-lg">
+        <div class="flex flex-col flex-1">
+          <div class="font-bold">
+            January 2025 Application Session
+          </div>
+          <div>
+            Closes: January 02, 2025<br>
+            Exam: February 23, 2025
+          </div>
+        </div>
+        <div class="w-[0.1rem] h-auto bg-white"></div>
+        <button class="items-center text-xl flex group">
+          Apply
+          <svg class="w-10 stroke-white group-active:scale-110 group-active:translate-x-2 transition-all duration-250"
+            viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 7L15 12L10 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+      </div>
+
+      <div class="flex flex-col md:inline-block m-4 gap-2">
+  <div class="md:w-1/2 float-left md:mr-4">
+
+    <script src="assets/home.js"></script>
+    <div id="iframeCarousel">
+      <iframe class="w-full aspect-video rounded-lg transition-opacity duration-500"
+        src="https://www.youtube.com/embed/lEMtlAqlJww" frameborder="0"
+        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+      <iframe class="w-full scale-0 opacity-0 absolute aspect-video rounded-lg transition-opacity duration-500"
+        src="https://www.youtube.com/embed/b0wrLw-Qyl0" title="" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+      <iframe class="w-full scale-0 opacity-0 absolute aspect-video rounded-lg transition-opacity duration-500"
+        src="https://www.youtube.com/embed/VeNHdAPH-9A" title="" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <!-- <div class="aspect-video text-center p-8 bg-gray-200 rounded-lg"> -->
+      <!-- Hello I'm supposed to be a video. -->
+      <!-- Loading the iframe takes too long. -->
+      <!-- </div> -->
+      <!-- <div class="scale-0 opacity-0 absolute aspect-video text-center p-8 bg-gray-200 rounded-lg"> -->
+      <!-- Hello I'm supposed to be video 2. -->
+      <!-- Loading the iframe takes too long. -->
+      <!-- </div> -->
+      <!-- <div class="scale-0 opacity-0 absolute aspect-video text-center p-8 bg-gray-200 rounded-lg"> -->
+      <!-- Hello I'm supposed to be video 3. -->
+      <!-- Loading the iframe takes too long. -->
+      <!-- </div> -->
+    </div>
+
+    <div class="flex flex-row gap-2 items-center py-4">
+      <button id="carouselLeft"
+        class="hover:border-secondary-200 border-transparent border-2 rounded-full transition-all duration-250 p-2">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="size-6 text-gray-500">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+        </svg>
+      </button>
+      <div id="carouselIndicator" class="flex flex-row gap-4 flex-1">
+      </div>
+      <button id="carouselRight"
+        class="hover:border-secondary-200 border-transparent border-2 rounded-full transition-all duration-250 p-2">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="size-6 text-gray-500">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+        </svg>
+    </div>
+    </button>
+
+  </div>
+
+  <div class="flex flex-col gap-6 order-first md:order-none">
+
+    <div class="font-display text-2xl">
+      IIT Madras, India's top technical institute, welcomes you to the world's first 4-year Bachelor of Science
+      (BS)
+      Degree in Data Science and Applications with options to exit earlier in the
+      foundation, diploma or BSc degree level.
+    </div>
+    <div class="h-[0.1rem] bg-secondary-200 mx-6"></div>
+    <div class="mb-4">
+      For the first time, you can work towards an undergraduate degree / diploma from an IIT regardless of your
+      age,
+      location, or academic backgrounds.
+      More than 29000 students currently studying with us in the program.
+    </div>
+  </div>
+
+
+
+  <div class="py-2 flex flex-col gap-2">
+    <div class="flex gap-2">
+      <svg id="plus-circle" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+        stroke="currentColor" class="size-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+      </svg>
+      Further details
+    </div>
+    <div class="flex gap-2">
+      <svg class="size-6">
+        <use href="#plus-circle" />
+      </svg>
+      Fee structure
+    </div>
+  </div>
+
+</div>
+
+<div class="bg-[url('/static/render.png')] bg-cover bg-bottom rounded-xl mx-8 mb-8">
+  <div
+    class="flex flex-col md:flex-row gap-4 md:items-center p-4 text-xl text-gray-700 bg-white bg-opacity-50 rounded-xl backdrop-blur-lg shadow-xl border-4 border-secondary-500">
+
+    <div class="flex flex-row md:flex-col items-center gap-4">
+      <div class="bg-[url('/static/Director-01.jpg')] w-36 h-36 md:m-4 bg-cover bg-center md:rounded-full rounded-xl">
+      </div>
+      <div class="flex flex-col w-max">
+        <div class="font-display text-3xl">
+          Prof. V. Kamakoti
+        </div>
+        <div class="font-display text-2xl">
+          Director, IIT Madras
+        </div>
+      </div>
+    </div>
+    <div class="text-base lg:text-lg">
+      IIT Madras started this unique BS program to provide access to IIT quality education to the learners across
+      the
+      country.
+      Data Science is a growing field and the demand for skilled resources in the marked is very high. IIT Madras
+      has a rich history of providing
+      high-quality education and this program is designed to underline the fact that IIT is within the reach of
+      everyone. This BS program is meticulously
+      drafted and is aligned with the goals of National Education Policy.
+
+      We are planning to make IIT Madras a 'Vishwa-guru (Global Teacher)' through innovative approaches to enhance
+      the quality of education. In order to support the students from financially disadvantaged backgrounds to
+      pursue this
+      program, scholarships are being provided.
+    </div>
+  </div>
+</div>
+
+
+<div class="flex flex-col justify-center items-center mt-16 mb-16">
+  <div class="w-[90%] relative" x-data="{ activeSlide: 1, slides: [1, 2, 3, 4, 5] }">
+    <!-- Slides -->
+    <template x-for="slide in slides" :key="slide">
+      <div x-show="activeSlide === slide" class="h-80 flex items-center">
+        <img class="rounded-lg w-full h-full object-cover" x-bind:src="'/static/carousel/' + slide + '.jpg'" />
+      </div>
+    </template>
+
+    <!-- Prev/Next Arrows -->
+    <div class="absolute inset-0 flex">
+      <div class="flex items-center justify-start w-1/2">
+        <button class="bg-zinc-50 font-bold rounded-full size-12 -ml-6"
+          x-on:click="activeSlide = activeSlide === 1 ? slides.length : activeSlide - 1">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="size-8 m-2 text-gray-500">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+          </svg>
+        </button>
+      </div>
+      <div class="flex items-center justify-end w-1/2">
+        <button class="bg-zinc-50 font-bold rounded-full size-12 -mr-6"
+          x-on:click="activeSlide = activeSlide === slides.length ? 1 : activeSlide + 1">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="size-8 m-2 text-gray-500">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="absolute w-full flex items-center justify-center px-4">
+      <template x-for="slide in slides" :key="slide">
+        <button
+          class="flex-1 w-4 h-[.15rem] mt-4 mx-2 mb-0 rounded-full overflow-hidden transition-colors duration-200 ease-out hover:shadow-lg"
+          :class="{ 
+              'bg-secondary-200': activeSlide === slide,
+              'bg-gray-300': activeSlide !== slide 
+          }" x-on:click="activeSlide = slide"></button>
+      </template>
+    </div>
+  </div>
+
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-4 m-8 gap-4">
+  <div class="flex flex-col items-center">
+    <svg class="size-20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 511 511">
+      <path
+        d="M504.102 70.943C499.647 66.466 493.723 64 487.42 64h-88.435V45.766c9.29-3.138 16-11.93 16-22.266 0-12.958-10.542-23.5-23.5-23.5h-272c-12.958 0-23.5 10.542-23.5 23.5 0 10.336 6.71 19.128 16 22.266V64H23.58c-6.303 0-12.227 2.466-16.682 6.943C2.427 75.436-.017 81.4.015 87.736c.228 44.947 12.27 88.467 34.824 125.855 22.548 37.377 53.563 65.318 89.692 80.803a7.484 7.484 0 0 0 2.279.575c20.131 40.648 58.96 70.45 105.176 78.097V448h-40.5c-12.958 0-23.5 10.542-23.5 23.5v32a7.5 7.5 0 0 0 7.5 7.5h160a7.5 7.5 0 0 0 7.5-7.5v-32c0-12.958-10.542-23.5-23.5-23.5h-40.5v-74.935c46.215-7.646 85.043-37.448 105.175-78.095a7.494 7.494 0 0 0 2.309-.576c36.129-15.484 67.145-43.425 89.693-80.803 22.554-37.388 34.595-80.908 34.823-125.855a23.483 23.483 0 0 0-6.884-16.793zM119.485 15h272c4.687 0 8.5 3.813 8.5 8.5s-3.813 8.5-8.5 8.5h-272c-4.687 0-8.5-3.813-8.5-8.5s3.813-8.5 8.5-8.5zM47.683 205.843C26.525 170.77 15.229 129.903 15.015 87.66a8.58 8.58 0 0 1 2.517-6.138A8.477 8.477 0 0 1 23.58 79h88.406v152.5a142.98 142.98 0 0 0 6.748 43.504c-28.246-14.946-52.636-38.633-71.051-69.161zM327.985 471.5V496h-145v-24.5c0-4.687 3.813-8.5 8.5-8.5h128c4.687 0 8.5 3.813 8.5 8.5zm-64-23.5h-17v-73.259c2.813.165 5.646.259 8.5.259s5.687-.094 8.5-.259V448zm-8.5-88c-70.855 0-128.5-57.645-128.5-128.5V47h257v184.5c0 70.855-57.645 128.5-128.5 128.5zm207.833-154.157c-18.424 30.541-42.826 54.234-71.087 69.18a142.972 142.972 0 0 0 6.754-43.522V79h88.435c2.282 0 4.43.896 6.048 2.522a8.582 8.582 0 0 1 2.517 6.137c-.214 42.244-11.51 83.111-32.667 118.184z" />
+      <path
+        d="M332.091 151.657h-44.81l-13.848-42.616C270.86 101.119 263.815 96 255.486 96c-8.329 0-15.375 5.119-17.949 13.041l-13.847 42.616h-44.81c-8.33 0-15.375 5.119-17.949 13.041-2.574 7.922.118 16.205 6.856 21.1l36.251 26.339-13.847 42.617c-2.574 7.922.117 16.204 6.856 21.1 3.37 2.448 7.231 3.672 11.093 3.672s7.724-1.224 11.093-3.672l36.252-26.338 36.252 26.338c6.739 4.896 15.447 4.896 22.186 0 6.739-4.896 9.43-13.178 6.856-21.101l-13.847-42.616 36.252-26.339c6.738-4.896 9.429-13.178 6.855-21.1-2.573-7.922-9.619-13.041-17.948-13.041zm2.277 22.006-40.66 29.542a7.5 7.5 0 0 0-2.725 8.385l15.531 47.799c.785 2.416-.723 3.833-1.407 4.33-.684.497-2.498 1.493-4.552 0l-40.661-29.542a7.5 7.5 0 0 0-8.816 0l-40.661 29.542c-2.053 1.493-3.868.498-4.552 0-.685-.498-2.192-1.915-1.407-4.33l15.531-47.799a7.5 7.5 0 0 0-2.725-8.385l-40.66-29.542c-2.054-1.493-1.668-3.525-1.407-4.33s1.144-2.676 3.683-2.676h50.259a7.5 7.5 0 0 0 7.133-5.183l15.531-47.798c.785-2.415 2.837-2.676 3.683-2.676.846 0 2.898.261 3.683 2.675l15.531 47.799a7.5 7.5 0 0 0 7.133 5.182h50.259c2.539 0 3.421 1.871 3.683 2.676.261.806.647 2.838-1.407 4.331z" />
+    </svg>
+    <div class="font-bold text-xl">Best Online Program</div>
+    <div class="text-gray-600 text-center">
+      Awarded by QS Reimagine Education & The Wharton School, University of Pennsylvania
+    </div>
+  </div>
+  <div class="flex flex-col items-center">
+    <svg class="size-20" viewBox="40 40 920 920" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M919.58 285.272h-45.682v28.669h45.681c7.722 0 10.633 8.356 10.633 16.078v378.208c0 38.616-28.046 67.486-66.663 67.486H583.393c-23.172 0-45.33 21.402-45.33 44.575v4.571h-56.314v-4.571c0-23.173-15.26-44.575-38.432-44.575H163.162c-38.617 0-73.56-28.87-73.56-67.486V330.019c0-7.722 9.808-16.078 17.53-16.078h38.783v-28.67h-38.783c-23.172 0-45.176 21.574-45.176 44.748v378.208c0 54.068 47.139 95.13 101.206 95.13h280.155c7.722 0 10.787 9.209 10.787 16.93v7.004c0 15.45 15.785 25.212 31.236 25.212h56.031c15.45 0 24.338-9.761 24.338-25.212v-7.003c0-7.722 9.963-16.93 17.686-16.93h280.153c54.068 0 94.308-41.064 94.308-95.131V330.019c0-23.173-15.104-44.747-38.277-44.747z" />
+      <path
+        d="M271.853 285.272H439.77v28.669H271.853zm0 63.48H439.77v27.646H271.853zm0 62.458H439.77v28.669H271.853zm308.19-125.938h167.916v28.669H580.042zm0 63.48h167.916v27.646H580.042zm0 62.458h167.916v28.669H580.042z" />
+      <path
+        d="M842.537 229.982h-17.785v-5.021c0-30.895-21.358-58.46-52.253-58.46H604.406c-38.928 0-72.901 21.33-91.05 52.867-18.15-31.537-52.122-52.867-91.05-52.867H254.213c-30.894 0-59.15 27.564-59.15 58.46v5.021h-10.888c-27.03 0-52.593 27.119-52.593 58.013v378.208c0 38.617 33.415 67.53 70.103 67.53h255.64c23.173 0 42.024 20.478 42.024 41.98h28.015c0-21.502 18.85-41.98 42.024-41.98h255.64c36.688 0 63.206-28.913 63.206-67.53V287.995c-.002-30.894-18.668-58.013-45.697-58.013zm-238.131-35.836h168.092c15.45 0 24.608 15.363 24.608 30.815V624.18c0 15.45-9.158 25.595-24.608 25.595H604.406c-30.454 0-59.176 15.523-80.677 36.293v-412.08c0-42.481 38.195-79.842 80.677-79.842zm-381.7 30.815c0-15.45 16.056-30.815 31.506-30.815h168.093c42.48 0 73.779 37.36 73.779 79.842v411.914c-14.335-20.717-43.37-36.127-73.78-36.127h-168.09c-15.451 0-31.507-10.144-31.507-25.595V224.96zm-21.022 481.128c-21.238 0-42.459-16.713-42.459-39.886V287.995c0-15.184 13.56-30.368 24.95-30.368h10.886V624.18c0 30.895 28.257 53.24 59.151 53.24h168.093c26.733 0 50.311 14.026 64.132 34.76-8.88-4.08-18.719-6.091-29.114-6.091h-255.64zm657.879-39.886c0 23.173-13.3 39.886-34.537 39.886h-255.64c-10.395 0-20.234 2.012-29.114 6.092 13.82-20.735 37.399-34.761 64.133-34.761h168.092c30.895 0 52.253-22.345 52.253-53.24V257.627h17.785c11.387 0 17.027 15.184 17.027 30.368v378.208z" />
+      <path
+        d="M439.77 544.642c0 7.737-6.271 14.008-14.008 14.008H285.861c-7.737 0-14.008-6.271-14.008-14.008V488.7c0-7.736 6.271-14.007 14.008-14.007h139.901c7.737 0 14.008 6.271 14.008 14.007v55.943zm308.19 0c0 7.737-6.272 14.008-14.008 14.008H594.05c-7.736 0-14.008-6.271-14.008-14.008V488.7c0-7.736 6.272-14.007 14.008-14.007h139.902c7.736 0 14.007 6.271 14.007 14.007v55.943z"
+        fill="#E0E0E0" />
+    </svg>
+    <div class="font-bold text-xl text-center">Scholarships</div>
+    <div class="text-gray-600 text-center">
+      Learners from &lt; 5LPA eligible for up to 75% fee waivers. 2000+ students study for free
+    </div>
+  </div>
+  <div class="flex flex-col items-center">
+    <svg class="size-20" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M0 0c8.334 2.49 15.657 5.46 22.54 10.855 6.24 5.49 11.837 11.185 15.835 18.52 3.179 7.172 5.992 14.22 6.316 22.121l.128 3.05.118 3.267.127 3.41a631.93 631.93 0 0 1 .311 31.152l-.038 3.88c-.049 4.29-.127 8.58-.212 12.87l-.042 4.149c-.247 9.947-.247 9.947-1.863 13.99l-1.275 2.455-1.57 3.656 2.32 1.36 3.805.39c5.944.877 10.559 2.051 15.824 4.93 2.786 1.793 4.908 3.799 7.051 6.32l2.006 2.288c2.121 2.885 3.031 5.177 4.017 8.604l1.001 3.477c1.64 6.099 3.155 12.221 4.613 18.365l.984 4.117c.68 2.85 1.359 5.7 2.035 8.552a5224.12 5224.12 0 0 0 3.12 13.046l1.986 8.348.94 3.911c1.516 6.43 2.901 12.689 3.298 19.292-1.063 3.75-1.063 3.75-3 7-2.418 2.465-2.418 2.465-6 5-3.674 1.541-7.431 2.686-11.25 3.813l-3.047.943c-7.339 2.244-7.339 2.244-9.703 2.244.03 1.856.03 1.856.063 3.75l-.063 4.25c-1.14 2.233-1.14 2.233-3 4-2.61.506-2.61.506-5.807.515l-3.671.038-4.034-.02c-1.4.01-2.8.018-4.243.027-3.843.018-7.685.02-11.528.01-3.206-.005-6.412.002-9.618.01-7.561.017-15.123.013-22.684-.004-7.807-.017-15.613 0-23.42.032-6.698.026-13.396.034-20.094.025-4.003-.005-8.005-.003-12.007.018-4.461.022-8.921.003-13.382-.02l-4.034.036-3.67-.039-3.198-.002-2.61-.626c-1.868-2.317-1.868-2.317-3-5l.078-3.555-1.078-3.445c-3.878-2.04-8.024-3.032-12.25-4.125-8.703-2.34-8.703-2.34-12.75-3.875-3.234-2.555-3.234-2.555-5-5-1.24-3.72-1.266-6.868-1.225-10.77.418-5.996 1.903-11.735 3.33-17.558l.973-4.083c.68-2.838 1.365-5.676 2.056-8.511 1.046-4.298 2.072-8.6 3.095-12.902a9706.87 9706.87 0 0 1 2.001-8.317l.917-3.836c5.484-22.392 5.484-22.392 9.722-28.886 2.482-3.087 5.094-5.44 8.377-7.649 6.172-3.375 12.527-4.656 19.434-5.812l2.32-1.676-1.824-4.072c-1.979-4.632-2.534-8.543-2.678-13.574-.02-2.961-.018-5.917.006-8.877a1509.127 1509.127 0 0 1 .029-14.761c.029-4.232.026-8.463.013-12.694-.007-3.288.001-6.576.014-9.864.004-1.558.005-3.117 0-4.676-.014-10.797 1.046-20.226 4.913-30.33 4.07-8.232 8.68-14.978 15.527-21.152 7.62-5.888 16.162-9.736 25.266-12.75C-19.013-2.867-9.31-2.289 0 0Zm-37.563 12.875c-7.04 3.699-12.703 8.657-18.062 14.5-3.102 4.19-5.349 8.46-7.375 13.25a133.68 133.68 0 0 0-1.195 5.914l.57 2.836c3.122.441 5.406.43 8.5.125.863-.07 1.726-.14 2.615-.21 11.426-1.06 21.963-3.638 32.26-8.727 5.55-2.895 10.585-6.052 15.414-10.036l2.211-1.152c3.066.059 3.066.059 6 1 1.8 1.82 1.8 1.82 3.313 4.125 3.031 4.175 6.13 7.375 10.289 10.434 3.938 2.367 7.914 3.556 12.398 4.441l3.75.75 2.25-.75c-.409-5.07-1.983-9.318-4.063-13.938-3.497-6.614-8.41-11.972-14.015-16.882-5.116-4.009-10.5-7.048-16.672-9.09-13.656-3.823-25.362-2.36-38.188 3.41Zm34.938 26.5a136.374 136.374 0 0 0-4.938 3.188c-9.74 6.274-19.776 10.188-31.062 12.812l-3.08.118c-3.343.217-5.877.466-8.92 1.882-1.172 2.475-1.172 2.475-1.277 5.531.052 2.325.168 4.65.34 6.969l.087 3.477c.277 7.03 1.282 13.457 3.85 20.023 2.431 4.956 5.793 9.05 9.813 12.813 4.013 3.32 8.284 5.473 13.187 7.187 5.723 1.43 11.13 1.46 17 1 5.088-1.06 9.304-2.933 13.695-5.695 4.465-3.292 7.847-6.662 10.805-11.368 2.222-3.882 3.54-7.56 4.5-11.937.533-4.834.735-9.64.875-14.5l.277-3.918c.092-3.87.018-6.886-1.152-10.582-2.814-2.557-5.459-4.028-8.917-5.588-3.187-1.46-5.472-3.09-8.083-5.412l-2.688-3.25-2.312-2.75h-2Zm-62 36c-.535 3.466-.675 6.454-.629 9.938l-.007 3.115c0 2.19.014 4.378.04 6.568.033 3.337.02 6.67 0 10.008.007 2.124.017 4.247.03 6.371l-.015 3.015c.082 5.213.082 5.213 1.474 10.188 1.178 2.097 2.396 4.086 4.107 5.797 6.613.588 12.706-1.157 19-3l2-1c1.447-3.584 1.447-3.584 1.617-6.355l-.617-2.645c-2.388-2.678-2.388-2.678-5.5-5.188-3.405-2.867-6.213-5.398-8.754-9.062-4.113-7.818-5.829-14.918-6.848-23.645l-.898-3.105-2.517-1.315-2.483.315Zm95 1c-1.004 2.753-1.004 2.753-1.063 6.25-.645 6.16-1.774 11.276-4.316 16.926-3.486 6.073-8.398 10.919-13.683 15.449-.64.784-1.28 1.567-1.938 2.375-.834 4.085-.834 4.085 0 8l1.875 1.875c5.4 1.944 10.825 2.827 16.5 3.563l2.625-.438c2.41-2.01 2.41-2.01 4-5 2.016-5.702 2.349-10.899 2.406-16.871l.035-2.795c.019-1.935.032-3.87.04-5.806.02-2.981.081-5.96.144-8.94.013-1.882.024-3.764.031-5.647l.075-2.717c.055-2.709.055-2.709-.731-6.224l-2.988-.724-3.012.724Zm-59 45c-2.11 3.11-3.171 6.353-4 10v4c3.106 2.64 5.884 3.961 9.75 5.25 5.72 1.01 10.986 1.413 16.71.25 3.795-1.11 6.562-2.515 9.852-4.75l1.688-2.75c-1.56-3.607-1.56-3.607-4-7l-.25-3-.75-2c-3.085.108-3.085.108-5.422.598-3.054.476-5.987.523-9.078.527l-3.371.016c-2.77-.125-5.03-.57-7.692-1.266l-3.437.125Zm-32.534 18.771c-2.192.474-4.388.932-6.583 1.39-10.444 2.163-10.444 2.163-19.883 6.839-2.739 2.434-4.974 4.944-7 8-1.366 2.969-2.142 5.946-2.875 9.125l-.686 2.732a617.554 617.554 0 0 0-1.532 6.326 1275.3 1275.3 0 0 1-2.682 11.022c-.851 3.458-1.693 6.918-2.531 10.378-.42 1.735-.843 3.47-1.266 5.204-.598 2.458-1.185 4.92-1.768 7.381l-1.043 4.352-.617 3.48 1 3c3.347 1.043 3.347 1.043 7.313 1.688 1.336.25 2.673.502 4.05.761 3.683.65 3.683.65 7.637.551.606-2.112.606-2.112.482-4.83l.021-3.198-.034-3.503.021-3.575c.03-5.073.013-10.146 0-15.22-.002-3.693.02-7.386.041-11.08l-.034-3.454c.05-7.806.05-7.806 1.346-11.616 1.466-3.032 3.09-5.454 5.407-7.899 3.455-2.042 6.83-2.959 10.75-3.625 3.873-.285 7.731-.304 11.613-.3l3.307-.014c2.294-.005 4.588-.006 6.881-.002 3.518.004 7.035-.02 10.553-.045 2.232-.003 4.464-.003 6.697-.002l3.191-.028 2.955.019 2.598-.002 2.205.374 3 3-1 4c-2.092.499-2.092.499-4.884.498l-3.156.03-3.44-.024-3.518.028c-3.73.03-7.46.032-11.19.03-3.712.004-7.423.014-11.136.041-2.313.017-4.627.02-6.941.007-4.508.03-8.089.164-12.369 1.663l-2.366 1.727c-2.16 3.71-2.16 3.71-2.267 7.022l-.024 3.58-.038 4.065-.007 4.388-.02 4.513c-.012 3.152-.016 6.305-.015 9.457 0 4.03-.027 8.06-.061 12.091a1259.58 1259.58 0 0 0-.025 9.322 790.76 790.76 0 0 1-.047 6.617l.018 4.085-.008 3.584c.324 3.424.324 3.424 2.337 6.642l2.157 2.634c2.912.97 4.776 1.13 7.807 1.14l3 .018 3.286.003 3.465.015c3.79.015 7.581.022 11.372.027l7.888.017c5.516.01 11.032.017 16.549.02 7.074.006 14.148.03 21.222.058 5.432.019 10.864.024 16.296.026 2.608.003 5.217.01 7.825.024 3.646.017 7.292.015 10.938.008l3.275.028c2.725-.015 5.37-.073 8.077-.384 3.05-1.135 3.05-1.135 5-3l2-3c.32-3.1.32-3.1.29-6.687l.04-4.197.006-4.546.02-4.66c.012-3.256.016-6.512.015-9.769 0-4.169.027-8.337.061-12.505.022-3.209.026-6.417.025-9.626.003-1.536.012-3.073.027-4.61.02-2.15.011-4.303.002-6.454l.008-3.707-.494-3.239c-1.71-2.897-1.71-2.897-4-5-2.934-.978-4.842-1.13-7.899-1.142l-3.013-.021-3.248-.013-6.78-.072a1749.6 1749.6 0 0 0-10.712-.078c-3.44-.015-6.88-.055-10.32-.1l-3.255.006-3.004-.05-2.65-.018-2.119-.512-2-4 3-3c2.122-.381 2.122-.381 4.604-.388l2.823-.029 3.05.019 3.15-.01c2.205-.001 4.409.004 6.613.017 3.351.016 6.702 0 10.053-.02 2.145.003 4.289.007 6.434.013l3.012-.019c6.367.063 11.349 1.005 17.261 3.417 2.938 2.375 2.938 2.375 5 5 1.285 2.658 1.98 4.744 2.218 7.696l-.042 2.936-.028 3.346-.05 3.577c-.004 2.494-.006 4.99-.006 7.484a930.4 930.4 0 0 1-.088 11.813 655.232 655.232 0 0 0-.031 11.39l-.094 3.614c.018 4.179.018 4.179 1.121 8.144 3.772.217 5.543.006 9-1l3.32-.254 2.805-.309 2.883-.253 1.992-1.184c-.424-6.591-2.03-12.954-3.547-19.367l-.767-3.257a3313.05 3313.05 0 0 0-1.614-6.793c-.817-3.437-1.617-6.88-2.416-10.321-.525-2.21-1.05-4.42-1.578-6.63l-.708-3.08c-1.617-6.662-3.862-12.64-7.37-18.552-2.03-2.524-2.03-2.524-5-4-8.071-3.374-16.343-5.412-24.875-7.25l-3.625-.813c-7.177-1.679-7.177-1.679-14.5-1.937-2.18 1.367-2.18 1.367-4.188 3.25-3.945 3.254-7.683 5.23-12.453 7.023-4.832 1.489-9.443 2.079-14.488 1.997-5.598-.526-10.726-2.024-15.871-4.27a96.34 96.34 0 0 1-8.66-6.39l-2.34-1.61c-6.011 0-11.676 1.497-17.534 2.771Zm-48.466 88.229-3 2c-1.096 2.312-1.096 2.312-1 5 1.331 2.663 1.331 2.663 4 5 3.238 1.483 6.572 2.43 10 3.375l2.734.824c3.6 1.05 3.6 1.05 7.266 1.801l4-1c-1.127-3.302-1.127-3.302-3-7l-.438-3.75-1.562-3.25c-5.156-2.238-10.498-2.884-16.063-3.313l-2.937.313Zm171 3-1 1a112.245 112.245 0 0 0-1 4.813 160.62 160.62 0 0 1-2 9.187c5.647-.14 10.996-2.098 16.313-3.875l2.455-.777c2.107-.699 4.174-1.516 6.232-2.348l2-3c-.164-3.07-.164-3.07-1-6l-2-2c-6.78-.753-13.505 1.183-20 3Zm-141 22-1 1c-.167 2.5-.167 2.5 0 5l1 1c1.695.111 3.395.153 5.094.167l3.344.035 3.7.023 3.873.034c11.77.098 23.541.149 35.312.186 8.71.027 17.42.078 26.13.16 6.85.063 13.7.087 20.55.098 2.922.01 5.845.033 8.767.068 4.074.045 8.146.048 12.22.04l3.708.071c4.214-.03 4.214-.03 8.302-.882l1.501-3.5-1.501-3.5c-3.924-1.185-7.943-.889-12.01-.81l-3.867-.009c-4.249 0-8.495.05-12.744.1-2.935.01-5.87.018-8.804.023-6.163.015-12.326.055-18.49.113-8.701.082-17.403.118-26.105.146-12.28.04-24.561.103-36.841.212l-3.701.023-3.344.035-2.925.024-2.169.143Z"
+        transform="translate(179.625 2.625)" />
+      <path
+        d="m0 0 4 2 1 3-.848 2.145L2 9a75.57 75.57 0 0 1-9.438.688C-14.271 9.832-14.271 9.832-21 11c-1.053 4.211-1.144 8.044-1.133 12.344l-.003 2.442c0 1.702.001 3.403.006 5.104.005 2.6 0 5.2-.007 7.801 0 1.655.002 3.31.004 4.965l-.006 2.352c.016 3.57.266 6.502 1.139 9.992 3.942 1.314 7.722 1.155 11.832 1.176 1.786.023 3.572.047 5.357.072 2.811.035 5.622.064 8.433.078 2.717.015 5.432.056 8.148.1l2.529-.006c2.396.05 2.396.05 6.701.58 3.514 1.848 3.514 1.848 6 4l1 3h2l1-4 3-3c2.559-.371 2.559-.371 5.438-.438 2.906-.144 2.906-.144 5.562-.562 2.656-1.73 2.656-1.73 4-4l1-2c.237-4.94.228-9.884.24-14.83.01-2.463.04-4.924.072-7.387.007-1.57.012-3.14.016-4.709l.028-4.325c-.148-3.713-.148-3.713-1.689-6.691L48 11c-3.316-1.105-5.822-1.126-9.313-1.14L34.93 9.8c-2.62-.033-5.24-.051-7.86-.054l-3.758-.074-3.449-.028L17 9c-2.02-2.354-2.02-2.354-3-5l2-3C26.57-.661 38.452-1.034 49 1c3.438 1.688 3.438 1.688 6 4 2.267 3.003 3.812 5.435 5 9 .133 2.856.212 5.686.238 8.543l.025 2.553c.014 1.784.024 3.569.032 5.353.012 1.817.032 3.633.062 5.45.043 2.631.059 5.262.069 7.894l.053 2.431c-.012 3.163-.216 6.062-1.315 9.044-1.52 3.15-3.06 5.627-5.539 8.107C50.746 65.157 48.29 66.195 45 67l-3.375-.313L39 67c-.334 3.374-.334 3.374 0 7l-2 3-2.625 1.125L31 78c-3.009-2.002-5.539-4.361-8-7l-2-3a68.76 68.76 0 0 0-8.008-.406l-2.422-.033a847.52 847.52 0 0 0-7.695-.061c-3.357-.015-6.713-.049-10.07-.094l-2.309.01c-3.902-.054-7.27-.515-10.918-1.834C-24 64-24 64-26.059 62.282-28.17 59.552-29.9 57.295-31 54a265.887 265.887 0 0 1-.238-9.27l-.025-2.768a1872.63 1872.63 0 0 1-.032-5.803c-.017-2.95-.061-5.899-.105-8.848-.01-1.881-.019-3.762-.026-5.643l-.053-2.662c.009-2.4.085-4.638.479-7.006 1.795-3.29 3.59-5.58 6.188-8.25C-21.84 1.9-19.116.96-15.677.312-10.47-.294-5.22-.475 0 0Z"
+        transform="translate(31 57)" />
+      <path
+        d="M0 0c2.723 1.053 4.641 2.298 6.902 4.14 2.415 2.362 3.838 4.286 5.563 7.25 1.17 4.172 1.465 7.244 1 11.563-1.195 3.154-2.102 5.324-4 8-2.214 2.32-4.406 4.066-7 6-4.03 1.343-7.688 1.384-11.918 1.348-3.082-.348-3.082-.348-5.508-1.29-3.098-1.86-5.56-4.042-8.012-6.683-1.562-2.375-1.562-2.375-2.562-5.375a65.81 65.81 0 0 1 0-12c1.734-4.202 3.588-6.579 6.75-9.812 3.25-2.188 3.25-2.188 7-3.625C-7.448-1.058-4.225-1.016 0 0Zm-8.535 7.953c-3.307 1.694-5.34 3.34-8 6-1.014 2.83-1.014 2.83-1 6 1.15 3.217 1.15 3.217 3 6l3 3c3.287 1.101 3.287 1.101 7 1 3.85-1.545 3.85-1.545 7-4 2.12-3.693 2.12-3.693 2.375-6.875-.206-3.265-.206-3.265-2.063-6.375C.684 9.878.684 9.878-2.035 8.578c-2.717-.787-2.717-.787-6.5-.625Z"
+        transform="translate(171.535 189.047)" />
+      <path
+        d="M0 0c3.37-.101 6.72-.14 10.09-.133l3.075-.003c2.151 0 4.303.001 6.454.006 3.3.005 6.602 0 9.902-.007 2.086 0 4.171.002 6.256.004l3.009-.006C41.19-.13 43.596-.07 46 0l2 1c.313 2.438.313 2.438 0 5l-3 2a153.4 153.4 0 0 1-9.848.266l-2.932.005c-2.045.002-4.09-.002-6.135-.01-3.139-.011-6.277 0-9.415.012-1.985 0-3.97-.003-5.955-.007l-2.857.012C5.57 8.26 3.284 8.14 1 8l-2-2c-.188-2.563-.188-2.563 0-5l1-1Z"
+        transform="translate(22 79)" />
+      <path
+        d="M0 0c3.37-.114 6.719-.164 10.09-.168l3.075-.01c2.151-.005 4.303-.007 6.454-.007 3.3-.002 6.602-.02 9.902-.04 2.086-.003 4.171-.005 6.256-.005l3.009-.022c2.406.008 4.811.12 7.214.252l2 2-1 4-1 1c-3.382.101-6.743.14-10.125.133l-3.083.003c-2.155 0-4.31-.001-6.466-.006-3.312-.005-6.623 0-9.935.007-2.089 0-4.177-.002-6.266-.004l-3.024.006A267.973 267.973 0 0 1 0 7l-1-1c-.125-2.5-.125-2.5 0-5l1-1Z"
+        transform="translate(22 95)" />
+      <path
+        d="m0 0 4 2 .688 2.938L4 8c-3.225 1.87-6.327 2.795-9.875 3.875-3.794.152-6.616-.749-10.172-1.988C-18 9-18 9-20 7l-.117-3.105L-19 1c3.492-.55 3.492-.55 7.875-.313C-5.462 1.082-5.462 1.082 0 0Z"
+        transform="translate(173 97)" />
+      <path
+        d="M0 0c2.625.25 2.625.25 5 1l1 1a97.04 97.04 0 0 1 .375 6.438l.148 3.558L6 15l-2.273 1.598L1 17l-2.285-1.031L-3 14c-.496-2.594-.496-2.594-.438-5.5l.004-2.906L-3 3l3-3Z"
+        transform="translate(183 63)" />
+      <path
+        d="M0 0c2.5-.313 2.5-.313 5 0l2 2c.23 2.75.23 2.75.188 6l-.02 3.25L7 14l-1 2-4 1-2.25-1.313L-2 13c-.453-3.377-.484-6.626 0-10l2-3Z"
+        transform="translate(143 63)" />
+    </svg>
+    <div class="font-bold text-xl text-center">No Age Limit</div>
+    <div class="text-gray-600 text-center">
+      Learners from any age and any where in the world can study in this program.
+      Current age of learners: 17 to 81 years.
+    </div>
+  </div>
+  <div class="flex flex-col items-center">
+    <svg class="size-20" viewBox="-40 -40 380 380" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M3.6 0H0c-11.8-.1-22.4 1-31.2 9.5-8.6 9.9-10 19.5-10.1 32.2v6c-.1 7.2-.5 13.6 3.3 19.9 2.6 1.8 4.7 3 5.8 6.1A33 33 0 0 0-22.3 92l1.6 1.2c3.4 4 3.4 4 3.7 9.4a2266.3 2266.3 0 0 0-14.4 3.2c-11.6 2.6-23.1 5-32.6 12.7-7 7-11.1 16.8-11.2 26.7l.2 3.4c-7.8-.3-15.1 2-21.1 7a26.7 26.7 0 0 0-7.5 19.5v2.7a712.1 712.1 0 0 0 0 15.7 2171.7 2171.7 0 0 0 .2 31.5 4741.1 4741.1 0 0 0 0 30v3c.1 6.2 0 11 3.6 16.4 4 4.6 8.5 9.5 14.8 10.5l6 .7a6868.5 6868.5 0 0 0 0 19.7v8.4l-.1 2.7v5c0 3.9.5 7 2.3 10.4 2.3 2.3 2.3 2.3 11.5 2.4h11.1c3.3.1 3.3.1 6.2-.6 4-4.1 4.5-7.7 4.5-13.2l-.1-2.6v-5.1l-.4-27.1h57l-.1 17.6v7.8l-.1 2.1c0 7.2.4 13.5 5.3 19.2 3.2 2.1 3.2 2.1 13.8 2h4.2a845.5 845.5 0 0 0 23.7 0 3249.3 3249.3 0 0 0 44.3 0H137a987.7 987.7 0 0 0 16 0c5.3 0 11.4 1 16-2 5.4-6.2 5.4-6.2 5.2-29a1015.4 1015.4 0 0 1-.2-15.8v-3c4.6 0 9.4-3.4 12.6-6.5 6.8-8.7 6.8-19 6.8-29.6a579.3 579.3 0 0 1 0-13v-7.1c-.4-3.7-.6-5.2-3.4-7.7-3-.5-3-.5-6 0-2.2 3.3-2.2 3.3-2.3 9.3v2.5l-.2 8.2-.1 11.2v2.6c0 3-.1 6.1-.4 9.2-1.3 4.5-3.2 6.2-7 9v-11c.2-10.9.4-21.8-5.4-31.4-10.4-14.4-10.4-14.4-51.5-22.2l-2.1-.4V205l.3-3.3c.1-3.5 0-5.4 2.6-7.9l2.1-1.2c9.5-9 13.8-17.9 14.9-30.8l.1-2.2a1803 1803 0 0 1 24.3.4h2.4c5.7.1 10.3.5 15.3 3.6a22 22 0 0 1 4.5 14.4v22.5c0 2.8.1 5.2.5 8 1.9 2 1.9 2 4 3 2.6 0 2.6 0 5-1 2.2-3 2.2-5.8 2.3-9.4v-2.2a3454 3454 0 0 0-.1-16.3v-2.3c0-9.4-1.4-17.6-8.2-24.7-9.3-7.6-20-7.4-31.3-7.3a669.4 669.4 0 0 1-15.7.2h-3V136l.1-2.7a22 22 0 0 0-2.8-11c-3-5.3-7.2-7.4-13-9-2.7-.8-5.3-1.6-8-2.9-6.5-3-12-4.3-19.2-4.3h-3.3c-5 0-10.2-.3-15 1.3-10.3 4.5-20.4 2-31-.7a525.8 525.8 0 0 0-15.8-4c0-4 0-5 2-8a31.8 31.8 0 0 0 13.1-20c.2-2.2.2-2.2.9-4l4-2c3.3-4 4.5-7 4.5-12.2v-2.3a2012.4 2012.4 0 0 0-.1-17.6v-2.4c0-5.5-.5-10.2-2.4-15.5A26.1 26.1 0 0 0 31.2 7a32 32 0 0 1-8.5-2.7 37.9 37.9 0 0 0-19-4.5zM-7.3 10.5c6.9 0 13.5-.3 20.3 1 4.7 2.4 9 4 14 5.3 4.4 1 7.9 2 11 5.3 2 3.3 2.5 5.4 2.4 9.2v2l-.4 7.2a76 76 0 0 0-7-5.3l-1.8-1-1.8-1a19.2 19.2 0 0 0-15.7 1.5l-7.8 3.9a47.4 47.4 0 0 1-35.9 3v-5.8a24.6 24.6 0 0 1 6-18.2c5-4.2 10.1-6.7 16.7-7zm30 32c1-.2 2.1-.2 3.3 0l1 1c1.6 1 3.1 2.2 4.7 3.3l1.9 1.4c3.5 2.4 6.2 4 7 8.5-.3 2.8-.3 2.8-2 4l-4 2.2c-2 2-2 2-2.7 6.4-.7 4.5-1.8 7.5-4.4 11.3A34.4 34.4 0 0 1 7 93.9c-6.2.3-11.2-1.4-16.2-5a35 35 0 0 1-13.4-24.2l-.3-2.1-6-2-1-7h8.6c12.7.2 23.8-2.1 35.3-7.7 3-1.6 5.7-3 8.8-3.4zm-28.7 60c6.5 1.1 12.6.8 19.2.2l2.8-.2c.1 3.5.3 6.8-.6 10.2a21.2 21.2 0 0 1-7.4 5.8c-4.8.4-6.8-.1-10.6-3-3.3-6-3.3-6-3.4-13zm31 11a253 253 0 0 1 21.1 4l2.3.5c5.4 1.2 5.4 1.2 7.6 3.5l-.6 1.8c-2 6-2.7 11.8-3 18l-.1 2.4-.3 5.8h-3.2a5753.8 5753.8 0 0 0-65.7.2l-8 .1h-2.3c-2.5 0-2.5 0-5.8.7-2 2.4-2 2.4-3 5 3.2 2.9 5.5 3.3 9.8 3.4h2.4a894 894 0 0 0 13.4.1 2923.7 2923.7 0 0 0 29.7.2l29.5.2H52l.4 2.6.5 3.2c1.6 9.7 5.2 18 12.5 24.6a59 59 0 0 1 6.6 6.7c.9 3.8.7 7.1 0 11-2 1-2 1-4.5 1.6l-3.2.6-7.2 1.6c-10.8 2.2-22.5 4.2-31.3 11.3-10 9.9-12 21.2-12.4 34.9v3.7l-.4 10.9v2.4h-51.4a13315 13315 0 0 1-32.7 0H-74c-7 .1-10.8 0-16-5a36 36 0 0 1-3.4-15.6v-2.4a898 898 0 0 1 .1-25.5 3455 3455 0 0 0 0-27.6l.1-5.7V182c0-7.1 0-12.3 4.5-18a22 22 0 0 1 12.4-4.8h3.9a821.1 821.1 0 0 1 15.3-.2h2c3.6 0 6.1.4 9-2 .4-.8.7-1.2 1.1-1.4l-1.3-2.5-1.7-2.5c-2.9-.6-5.2-.8-8.1-.8-7.8-.2-7.8-.2-8.9-1.2a27 27 0 0 1 6.6-20.8c6.8-8 17.5-9.5 27.2-11.5l3.7-.9c10-2.2 10-2.2 13.5-.8 1.3 1.7 1.3 1.7 2.4 3.8 2.7 4.6 5.4 7.4 10.6 9.2a28 28 0 0 0 18-3 34 34 0 0 0 8-11zm66.1 2.2c3 .2 6 .8 8.9 1.8 4.4 2.2 8.3 3.7 13.1 4.8 3.9 1 6.3 1.6 9.3 4.3a18 18 0 0 1 2.4 8.8v2.3c.6 15 1.7 32-8.8 44A33.4 33.4 0 0 1 93.5 192c-8-.4-15-3.3-21-8.8-9.6-10.5-10.8-21.6-10.5-35.4l.1-3.8.1-3.8.2-3.5a24 24 0 0 1 3.6-12.2 32.5 32.5 0 0 1 25.1-8.8zM83 201.6h21v5H83v-5zm12.1 15c4 0 7.9.3 11.8.6l3.1.4c7.5.8 14.8 2.3 22 4l3.3.8a44 44 0 0 1 22 10.3 41.9 41.9 0 0 1 6 23.7v3.4l-.3 11.8c-3.2-1.3-3.2-1.3-5.8-3.8-10.8-8.8-23.8-8.8-37-8.7a824.2 824.2 0 0 1-18.2 0 2922.3 2922.3 0 0 1-31.3.2H56.6c-5.7.1-10.8.2-16.2 2.2l-2.7 1.3c-4.5 2-8.2 4.5-12.1 7.5l-1.6 1.3-.1-8.8V259c-.3-8.7-.4-16.8 4.3-24.5 6.3-8.3 16.3-10.7 26-13l6-1.2c11.7-2.7 23.2-4 35-3.8zM65.7 269a927.1 927.1 0 0 0 18.3 0 2114.1 2114.1 0 0 0 43.3.1h2.6a31 31 0 0 1 24.1 9.4c7.7 8 9.4 17 9.3 27.7v3.4c0 4.5.8 9.8-1.3 14a20 20 0 0 1-7.6 2.2h-9.6a2634.4 2634.4 0 0 1-40 0 8604 8604 0 0 0-42.6 0H38.5l-3.2-.1c-3.3 0-6.2 0-9.3-1.1-2.2-2.8-2.2-2.8-2.3-5.7v-10.1c0-11.3.8-19.7 7.3-29.2 15.4-10.7 15.4-10.7 34.7-10.6zM-68 285.6h13a6730.2 6730.2 0 0 1 0 19.4v8.3l.1 2.6-.1 8.7c-1 1.2-1 1.2-3.5 1.1h-6c-2.4.1-2.4.1-3.5-1.1l-.1-6.1v-2.6a2864.7 2864.7 0 0 1 .1-30.3z"
+        transform="translate(103 2.4)" />
+      <path
+        d="M0 0h11.5l3-.1a6868.8 6868.8 0 0 1 51-.3h11c6 0 10.3 1.7 14.8 5.6 4.5 5.9 4.7 12 4.6 19.1v3.2a732 732 0 0 1 .2 16.8v9.5a27.4 27.4 0 0 1-6.8 18.4c-5.7 3.6-11.3 3.4-17.8 3.3-3.9.1-5.6.3-8.8 2.7l-8.9 11.5c-9.4 12.7-9.4 12.7-14 14.4a12 12 0 0 1-7.5-2 14.5 14.5 0 0 1-2.3-8.3v-2.6l-.1-5.2-.1-2.5v-2.3c-.3-2-.3-2-1.5-3.8-3-1.9-6.1-1.6-9.6-1.6a20051.5 20051.5 0 0 1-12 0c-17.4 0-17.4 0-23.4-4.6-4.6-6.2-4.5-11.6-4.5-19v-3.6a908.7 908.7 0 0 1 0-18.4 3214.9 3214.9 0 0 1 0-10.4c0-6.2.4-10 4.5-14.6C-11.3.3-7 0 0 0Zm-10.7 13.2c-.6 2.2-.6 2.2-.5 4.8v9.4a800.5 800.5 0 0 0 0 17.3V60c.4 2.3.4 2.3 2.4 4 3.2 1.8 6.4 1.6 10 1.6h2.3a756.5 756.5 0 0 0 16.7.2h2.2c5.8 0 9.6 1.7 14.2 5 2.4 3.4 2.7 6.7 3 10.6l.2 2.3.5 5.5a103.4 103.4 0 0 0 13.5-15.8l1.3-1.7c2.3-2.8 3.7-4.3 7.2-5.5l10.8-.5c5.4-.2 5.4-.2 10.2-2.5 1.2-2.4 1.2-4 1.2-6.6v-6l.1-3.2a2504.5 2504.5 0 0 0 .2-23.5v-8.5c-.3-2.3-.3-2.3-2-4-3.5-1.7-7-1.6-10.8-1.6h-2.6a996 996 0 0 0-26.3 0 2312.6 2312.6 0 0 1-33.3 0H-.7c-4.2 0-7.1 0-10 3.4Z"
+        transform="translate(240.7 2.8)" />
+    </svg>
+    <div class="font-bold text-xl text-center">Mode of Study</div>
+    <div class="text-gray-600 text-center">
+      Pre-recorded and synchronous sessions, Weekly Online Assignments, In-person quizzes
+    </div>
+  </div>
+  <div class="flex flex-col items-center">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width=".75" stroke="currentColor"
+      class="size-20">
+      <path stroke-linecap="round" stroke-linejoin="round"
+        d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605" />
+    </svg>
+    <div class="font-bold text-xl text-center">Data science Courses</div>
+    <div class="text-gray-600 text-center">
+      ML Foundations, Deep Learning, Reinforcement Learning, Computer Vision, LLMs, Big Data
+    </div>
+  </div>
+  <div class="flex flex-col items-center">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width=".75" stroke="currentColor"
+      class="size-20">
+      <path stroke-linecap="round" stroke-linejoin="round"
+        d="m6.75 7.5 3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0 0 21 18V6a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 6v12a2.25 2.25 0 0 0 2.25 2.25Z" />
+    </svg>
+
+    <div class="font-bold text-xl text-center">Programming Courses</div>
+    <div class="text-gray-600 text-center">
+      Python, Java, PostGreSQL, Linux commands, C programming, Full Stack Application Development
+    </div>
+  </div>
+  <div class="flex flex-col items-center">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width=".75" stroke="currentColor"
+      class="size-20">
+      <path stroke-linecap="round" stroke-linejoin="round"
+        d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 0 0 2.25-2.25V6.75a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 6.75v10.5a2.25 2.25 0 0 0 2.25 2.25Zm.75-12h9v9h-9v-9Z" />
+    </svg>
+
+    <div class="font-bold text-xl text-center">Frameworks and Libraries</div>
+    <div class="text-gray-600 text-center">
+      Flask, Vue, NumPy, Scikitlearn, Pytorch, OpenCV, Kafka and many more relevant for Data Science applications
+    </div>
+  </div>
+  <div class="flex flex-col items-center">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width=".75" stroke="currentColor"
+      class="size-20">
+      <path stroke-linecap="round" stroke-linejoin="round"
+        d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0M12 12.75h.008v.008H12v-.008Z" />
+    </svg>
+    <div class="font-bold text-xl text-center">Business Courses</div>
+    <div class="text-gray-600 text-center">
+      Business Data Management, Business Analytics, Tools in Data Science, Financial Forensics, Market Research,
+      Managerial Economics
+    </div>
+  </div>
+
+</div>
+<!-- end highlights div -->
+
+<!-- marquee -->
+<div class="w-full h-20 my-12 inline-flex flex-nowrap overflow-x-hidden">
+  <script>
+    const corpos = [
+      'Amazon.jpg',
+      'Capgemini.jpg',
+      'Cisco.jpg',
+      'Intel.jpg',
+      'Marlabs.jpg',
+      'Microsoft.jpg',
+      'Natwest.jpg',
+      'Oracle.jpg',
+      'RakutenIndia.jpg',
+      'Samsung.jpg',
+      'SymphonyAI.jpg',
+      'Verizon.jpg',
+    ]
+  </script>
+  <ul id="vendorMarquee"
+    class="flex items-center justify-center md:justify-start [&_li]:mx-4 [&_img]:max-w-none animate-infinite-scroll">
+    <template x-data x-for="corpo in corpos">
+      <li><img x-bind:src="'/static/' + corpo" class="size-20"></li>
+    </template>
+  </ul>
+  <ul id="vendorMarquee"
+    class="flex items-center justify-center md:justify-start [&_li]:mx-4 [&_img]:max-w-none animate-infinite-scroll"
+    aria-hidden="true">
+    <template x-data x-for="corpo in corpos">
+      <li><img x-bind:src="'/static/' + corpo" class="size-20"></li>
+    </template>
+  </ul>
+</div>
+<!-- end marquee -->
+
+      <div class="bg-primary-700 pt-8 text-white lg:pb-2 pb-28">
+        <div class="px-8">
+          <div class="text-xl my-4">Contact Us</div>
+          <div class="grid grid-cols-1 gap-2 lg:grid-cols-3">
+            <div class="gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="size-6 inline">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+              </svg>
+              support@study.iitm.ac.in
+            </div>
+            <div class="lg:mx-auto gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="size-6 inline">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
+              </svg>
+              7850999966
+            </div>
+            <div class="gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="size-6 inline">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+              </svg>
+              IITM BS Degree Office, 3rd Floor, ICSR Building,
+              IIT Madras, Chennai - 600036
+            </div>
+          </div>
+          <div class="text-sm my-4">
+            Please use ONLY the above methods for any queries regarding the program. Our normal response time is 3
+            working days. It might take a little longer during busy periods. We will share Google Meet links during
+            such
+            periods. Due to the high volume of calls we receive every day, there might be long wait times. In some
+            cases, you might have to call multiple times to successfully connect to us.
+          </div>
+          <div class="flex my-4">
+            <div class="flex-1">
+              &copy; IIT Madras. All rights reserved.
+            </div>
+            <a href="#" class="hover:border-white border-b-2 border-transparent transition-all duration-200">
+              View sitemap
+            </a>
+          </div>
+        </div>
+
+        <div class="h-[0.075rem] bg-white"></div>
+        <div class="flex mx-8 my-4 items-center">
+          <div class="flex flex-1">
+            <div class="p-2">
+              <img src="/static/socials/facebook.svg" class="size-10" />
+            </div>
+            <div class="p-2">
+              <img src="/static/socials/instagram.svg" class="size-10" />
+            </div>
+            <div class="p-2">
+              <img src="/static/socials/twitter.svg" class="size-10" />
+            </div>
+            <div class="p-2">
+              <img src="/static/socials/linkedin.svg" class="size-10" />
+            </div>
+            <div class="p-2">
+              <img src="/static/socials/whatsapp.svg" class="size-10" />
+            </div>
+          </div>
+          <div class="p-2">
+            <a href="#">Privacy Policy</a>
+            |
+            <a href="#">Terms of Service</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>IIT Madras Degree Program in Data Science and Applications</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/output.css">
+  <script src="/assets/main.js" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v1.9.5/dist/alpine.js"></script>
+</head>
+
+<body class="font-body bg-zinc-50">
+  <div class="flex gap-0 fixed w-screen bg-zinc-50/90 z-20 before:backdrop-blur-lg before:absolute before:inset-0">
+    <div class="flex-1 m-4 z-10">
+      <img src="/static/IITMOD-Logo.svg" class="h-16 w-auto">
+    </div>
+
+    <!-- this element separates out into the bottom dock for mobile view -->
+    <div class="grid grid-cols-3 gap-2 fixed h-20 bottom-0 w-full
+      bg-white p-2 lg:px-0 lg:py-4 lg:bg-transparent
+      lg:flex lg:h-auto lg:w-auto lg:static z-20
+      shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)] lg:shadow-none
+      " id="dock">
+      <!-- menu trigger -->
+      <button id="menuOpen" class="flex-auto text-gray-700 justify-center flex items-center border-transparent hover:border-gray-300 border-2 px-4 rounded-lg gap-2
+      lg:scale-0 lg:absolute transition-translate duration-200
+      ">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="size-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+      </button>
+
+      <div id="searchModal" class="flex gap-4 flex-row mx-2 justify-center lg:w-96">
+        <!-- search trigger -->
+        <input id="search" class="border-2 absolute scale-0
+        lg:static lg:scale-100 lg:flex-1
+        border-gray-300 p-4 rounded-lg
+        transition-all duration-250" type="text" placeholder="Search"></input>
+        <button id="searchCloseButton" class="
+        lg:absolute lg:scale-0 text-gray-700
+        scale-0 absolute border-transparent
+        hover:border-gray-300 border-2 px-4 py-auto rounded-lg transition-opacity gap-2 duration-500
+      ">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+          </svg>
+        </button>
+        <button id="searchButton" class="lg:flex-none flex-auto flex items-center justify-center text-gray-700 border-transparent hover:border-gray-300 border-2 px-4 py-auto rounded-lg transition-[translate] gap-2 duration-500
+      ">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- language selector -->
+      <div
+        class="relative z-20 flex-auto lg:flex-none text-gray-700 flex items-center border-transparent hover:border-gray-300 border-2 rounded-lg transition-all duration-500">
+        <button id="languageSelector" class="flex gap-2 flex-auto px-4 h-full justify-center items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" />
+          </svg>
+          <div id="currentLanguage">
+            English
+          </div>
+        </button>
+        <div id="languages" tabindex='-1'
+          class="absolute border-[0.1rem] border-gray-200 scale-0 bg-white opacity-0 w-full lg:w-[200%] rounded-lg lg:shadow-[0_10px_40px_-15px_rgba(0,0,0,0.6)] shadow-lg transition-all duration-200 divide-y overflow-hidden">
+          <div class="p-4 hover:bg-gray-100 transition-all duration-200">
+            English
+          </div>
+          <div class="p-4 hover:bg-gray-100 transition-all duration-200">
+            हिंदी
+          </div>
+          <div class="p-4 hover:bg-gray-100 transition-all duration-200">
+            தமிழ்
+          </div>
+          <div class="p-4 hover:bg-gray-100 transition-all duration-200">
+            తెలుగు
+          </div>
+          <div class="p-4 hover:bg-gray-100 transition-all duration-200">
+            മലയാളം
+          </div>
+          <div class="p-4 hover:bg-gray-100 transition-all duration-200">
+            ಕನ್ನಡ
+          </div>
+          <div class="p-4 hover:bg-gray-100 transition-all duration-200">
+            मराठी
+          </div>
+          <div class="p-4 hover:bg-gray-100 transition-all duration-200">
+            ગુજરાતી
+          </div>
+          <div class="p-4 hover:bg-gray-100 transition-all duration-200">
+            বাংলা
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- sign in trigger -->
+    <button class="m-4 bg-secondary-100 border-secondary-200 border-2 font-bold text-gray-700 px-4 py-2 rounded-lg
+      hover:border-secondary-300 hover:shadow-md hover:shadow-secondary-500/50
+      active:scale-95 z-10
+      transition-all duration-500">
+      Sign in
+    </button>
+  </div>
+
+  <div class="lg:grid lg:grid-cols-8 lg:pb-0 pt-28">
+    <div id="menu" class="bg-zinc-50
+      text-gray-700 border-zinc-200 border-r-2 border-t-2 rounded-tr-lg
+      top-0
+      fixed w-full h-full overflow-y-scroll
+      lg:top-28 lg:sticky lg:sidebar lg:col-span-2 lg:translate-x-0
+      transition-all duration-250
+      py-24
+      lg:py-0
+      -translate-x-full z-10
+      ">
+      <!-- icons sourced from heroicons.com -->
+      <svg id="chevron-down" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+        stroke="currentColor" class="w-0 h-0">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+      </svg>
+
+      <div id="accordion" class="transition-all duration-200">
+        <button class="px-6 py-4 items-center w-full flex flex-row active:scale-[0.98] duration-200">
+          <div class="flex-1 text-left">
+            Academics
+          </div>
+          <svg class="size-6">
+            <use href="#chevron-down" />
+          </svg>
+        </button>
+        <div id="contents" class="bg-gray-200 pl-8 pr-4 rounded-l-lg grid grid-cols-1 divide-y divide-gray-300 transition-all duration-200
+          max-h-0 overflow-y-hidden
+          ">
+          <!-- wrap in an extra div for grouping items -->
+          <div>
+            <div class="py-4">
+              <a href="/academics/">
+                Overall Structure
+              </a>
+            </div>
+            <div class="py-4">
+              <a href="/academics/">
+                Term Structure
+              </a>
+            </div>
+            <div class="py-4">
+              <a href="/academics/">
+                Course Registrations
+              </a>
+            </div>
+            <div class="py-4">
+              <a href="/academics/">
+                Assessments
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <div class="py-4">
+              <a href="/academics/">
+                Exam Cities
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <div class="py-4">
+              <a href="/academics/">
+                Fee Structure
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <div class="py-4">
+              <a href="/academics/">
+                Foundation Level
+              </a>
+            </div>
+            <div class="py-4">
+              <a href="/academics/">
+                Diploma Level
+              </a>
+            </div>
+            <div class="py-4">
+              <a href="/academics/">
+                BSc Degree Level
+              </a>
+            </div>
+            <div class="py-4">
+              <a href="/academics/">
+                BS Degree Level
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <div class="py-4">
+              <a href="/academics/">
+                Sample Certificates
+              </a>
+            </div>
+          </div>
+
+          <div class="py-4">
+            <a href="/academics/">
+              Academic Calendar
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+      <div id="accordion" class="transition-all duration-200">
+        <button class="px-6 py-4 items-center w-full flex flex-row active:scale-[0.98] duration-200">
+          <div class="flex-1 text-left">
+            Admissions
+          </div>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+          </svg>
+        </button>
+        <div id="contents" class="bg-gray-200 pl-8 pr-4 rounded-l-lg grid grid-cols-1 divide-y divide-gray-300 transition-all duration-200
+          max-h-0 overflow-y-hidden
+          ">
+          <div>
+            <div class="py-4">
+              <a href="/admissions/">
+                Important Dates
+            </div>
+            <div class="py-4">
+              <a href="/admissions/">
+                Mandatory Requirements
+            </div>
+          </div>
+
+          <div>
+            <div class="py-4">
+              <a href="/admissions/">
+                Eligibility to Apply
+              </a>
+            </div>
+            <div class="py-4">
+              <a href="/admissions/">
+                Application Process
+              </a>
+            </div>
+            <div class="py-4">
+              <a href="/admissions/">
+                Admission to the Foundation Level
+              </a>
+            </div>
+            <div class="py-4">
+              <a href="/admissions/">
+                Regular Entry
+              </a>
+            </div>
+            <div class="py-4">
+              <a href="/admissions/">
+                JEE-based Entry
+              </a>
+            </div>
+          </div>
+
+          <div class="py-4">
+            <a href="/admissions/">
+              International Students
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div id="accordion" class="transition-all duration-200">
+        <button class="px-6 py-4 items-center w-full flex flex-row active:scale-[0.98] duration-200">
+          <div class="flex-1 text-left">
+            About IITM
+          </div>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+          </svg>
+        </button>
+        <div id="contents" class="bg-gray-200 pl-8 pr-4 rounded-l-lg grid grid-cols-1 divide-y divide-gray-300 transition-all duration-200
+          max-h-0 overflow-y-hidden
+          ">
+          <div>
+            <div class="py-4">
+              <a href="/about/">
+                About IIT Madras
+              </a>
+            </div>
+            <div class="py-4">
+              <a href="/about/">
+                Faculty Co-ordinators
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <div class="py-4">
+              <a href="/about/">
+                Contact Us
+              </a>
+            </div>
+            <div class="py-4">
+              <a href="/about/">
+                Merchandise
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="accordion" class="transition-all duration-200">
+        <button class="px-6 py-4 items-center w-full flex flex-row active:scale-[0.98] duration-200">
+          <div class="flex-1 text-left">
+            <a href="/partnerships/">
+              Partnerships
+            </a>
+          </div>
+        </button>
+      </div>
+
+    </div>
+    <div class="lg:col-span-6 lg:col-start-3">
+      <div class="ml-4 flex bg-primary-700 text-white p-4 flex-row gap-5 rounded-l-lg">
+        <div class="flex flex-col flex-1">
+          <div class="font-bold">
+            January 2025 Application Session
+          </div>
+          <div>
+            Closes: January 02, 2025<br>
+            Exam: February 23, 2025
+          </div>
+        </div>
+        <div class="w-[0.1rem] h-auto bg-white"></div>
+        <button class="items-center text-xl flex group">
+          Apply
+          <svg class="w-10 stroke-white group-active:scale-110 group-active:translate-x-2 transition-all duration-250"
+            viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 7L15 12L10 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+      </div>
+
+      <div class="mx-auto px-4 py-8 max-w-5xl space-y-4">
+  <div class="space-y-4">
+    <div class="font-display text-2xl">
+      Overall Structure
+    </div>
+    <div class="space-y-4">
+      <p>
+        There are four levels in the IIT Madras Degree program and to get the BS Degree in Data Science and Applications
+        from IIT Madras, a learner has to successfully complete all four levels.
+      </p>
+
+      <p>
+        There is also the flexibility to exit at any level. Depending on the courses completed and credits earned, the
+        learner can receive a Foundation Certificate from IITM CODE (Centre for Outreach and Digital Education) or
+        Diploma(s) from IIT Madras or BSc Degree in Programming and Data Science from IIT Madras or BS Degree in Data
+        Science and Applications from IIT Madras.
+      </p>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-6 h-min">
+    <img src="/static/roadmap.svg" class="col-span-2" />
+    <div class="flex flex-col bg-zinc-200 p-4 rounded-lg space-y-4 col-span-4">
+
+      <div>
+        <div class="font-semibold">
+          Courses and Credits in Each Level
+        </div>
+
+        <div>
+          Foundation Level: 32 credits | 8 courses
+        </div>
+        <div>
+          Diploma Level:
+        </div>
+        <ul class="list-disc list-inside">
+          <li>Programming: 27 credits | 6 courses + 2 projects</li>
+          <li>Data Science: 27 credits | 6 courses + 2 projects</li>
+        </ul>
+        <div>
+          BSc Degree Level: 28 credits<br>
+          BS Degree Level: 28 credits
+        </div>
+      </div>
+
+      <div>
+        <div class="font-semibold">
+          Total credits required for each degree
+        </div>
+
+        <div>
+          BSc Degree: 114 credits<br>
+          BS Degree: 142 credits
+        </div>
+      </div>
+
+      <div>
+        <div class="font-semibold">
+          Completion time: 4 - 8 years</div>
+
+        <div>The time period for this is based on learner’s preferred pace and performance in assessments. Expected
+          learner</div>
+        <div>engagement will be approximately 10hrs/course/week.</div>
+      </div>
+
+      <div>
+        <div class="font-semibold">
+          Fees: Each term, pay only for courses you register for!</div>
+
+        <div>Refer to Fee Structure.</div>
+      </div>
+
+      <div>
+        <div class="font-semibold">
+          Online Courses & Assignments</div>
+
+        <div>Duration of each course: 12 weeks - Each week comprising 2-3 hrs of videos, practice questions, text
+          transcripts</div>
+        <div>and online graded assignment(s).</div>
+      </div>
+
+      <div>
+        <div class="font-semibold">
+          Quizzes and Exams</div>
+        <div>In-person invigilated quizzes and exams as per the grading pattern defined for each course.</div>
+      </div>
+
+    </div>
+  </div>
+
+
+</div>
+
+<div class="w-100 bg-zinc-200 py-4 px-8">
+  <div class="max-w-5xl mx-auto">
+    <p id="AC2" class="font-display text-2xl">Term Structure</p>
+
+    <div class="flex ">
+      <span style="width: 25px" class="">
+        <i class="fa fa-check"></i>
+      </span>
+
+      <p style="flex-basis: 100%" class="">
+        Every <b>year is divided into three terms </b> of four months each -
+        <i>January Term, May Term and September Term.</i>
+      </p>
+    </div>
+
+    <div class="flex ">
+      <span style="width: 25px" class="">
+        <i class="fa fa-check"></i>
+      </span>
+
+      <p style="flex-basis: 100%" class="">
+        Each term of four months has 12 weeks of coursework (video lectures and assignments), 2 in-person
+        invigilated
+        Quizzes and End Term Exams. Depending on the course, assessments may include programming exams, mini
+        projects,
+        vivas, take home assignments, etc.
+      </p>
+    </div>
+    <img src="/static/course_structure_web.png" class="max-w-md mx-auto">
+  </div>
+
+</div>
+
+<!--course reg-->
+<div class="px-8 max-w-5xl mx-auto my-8">
+  <p id="AC3" class="font-display text-2xl">Course Registrations</p>
+
+  <div class="row">
+    <div class="col-12 col-md-12">
+      <div class="flex ">
+        <span style="width: 25px" class="">
+          <i class="fa fa-check"></i>
+        </span>
+
+        <p style="flex-basis: 100%" class="">
+          In each term, a learner may register for upto 4 courses depending on their CCC (Credit Clearing Capability).
+        </p>
+      </div>
+
+      <div class="flex ">
+        <span style="width: 25px" class="">
+          <i class="fa fa-check"></i>
+        </span>
+
+        <p style="flex-basis: 100%" class="">
+          A learner’s CCC in the Foundation Level is calculated based on their performance in the Qualifier Exam or the
+          previous term’s End Term Exams. The CCC in the Diploma Level and thereafter is 4.
+        </p>
+      </div>
+
+      <div class="flex ">
+        <span style="width: 25px" class="">
+          <i class="fa fa-check"></i>
+        </span>
+
+        <p style="flex-basis: 100%" class="">
+          All 8 courses in Foundation Level need to be successfully completed before registering for any Diploma Level
+          course.
+          Similarly, all Diploma Level courses &amp; projects need to be successfully completed before registering for
+          any Degree
+          Level course.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--assessments-->
+<div class="w-100 px-8 bg-zinc-200 pt-4 pb-5 space-y-4">
+  <div class="container-fluid container-md">
+    <p id="AC4" class="font-display text-2xl">Assessments</p>
+
+    <div class="flex ">
+      <span style="width: 25px" class="">
+        <i class="fa fa-check"></i>
+      </span>
+
+      <p style="flex-basis: 100%" class="">
+        There are 3 types of assessments for each course:<br>
+        <i class="fa fa-dot-circle-o" aria-hidden="true"></i>&nbsp;
+
+        <u>Weekly Assignments</u> which are online<br><i class="fa fa-dot-circle-o" aria-hidden="true"></i>&nbsp;
+        monthly
+        in-person <u>Quizzes</u><br><i class="fa fa-dot-circle-o" aria-hidden="true"></i>&nbsp; in-person <u>End Term
+          Exam</u>
+      </p>
+    </div>
+
+    <div class="flex ">
+      <span style="width: 25px" class="">
+        <i class="fa fa-check"></i>
+      </span>
+
+      <p style="flex-basis: 100%" class="">
+        In addition, assessments may include <u>programming exams, mini projects, vivas, take home assignments, etc.</u>
+      </p>
+    </div>
+  </div>
+
+
+  <section>
+    <p class=" font-weight-500">
+      There are 3 types of assessments for each course - online weekly assignments, monthly in-person
+      invigilated quizzes and an in-person invigilated end term exam.
+    </p>
+
+    <p class="font-display text-xl">1. Online Assignments</p>
+
+    <div class="row mb-2">
+      <div class="col-12 col-md-6">
+        <div class="flex ">
+          <span style="flex-basis: 5%"><i class="fa fa-check" aria-hidden="true"></i></span>
+
+          <p class="font-weight-500" style="flex-basis: 95%">
+            A 12 week course will have one or more weekly assignments to be submitted online within the
+            due date specified.
+          </p>
+        </div>
+
+        <div class="flex ">
+          <span style="flex-basis: 5%"><i class="fa fa-check" aria-hidden="true"></i></span>
+
+          <p class="font-weight-500" style="flex-basis: 95%">
+            The average score of the best 5 out of the first 9 weekly assignments given during the
+            course run should be &gt;= 40/100 to be eligible to write the final exam and get the hall
+            ticket for the same. (Score in any unattempted assignment will be counted as 0).
+          </p>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6">
+        <div class="flex ">
+          <span style="flex-basis: 5%"><i class="fa fa-check" aria-hidden="true"></i></span>
+
+          <p class="font-weight-500" style="flex-basis: 95%">
+            The scores obtained in these will be counted towards the Total Course Score T and
+            will determine the eligibility to write the End Term Exam.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p id="AC5" class="font-display text-xl">2. Two Invigilated Quizzes</p>
+
+    <p class=" font-weight-500">
+      Two quizzes will be conducted at the end of Weeks 4 and 8 based on the content of Weeks 1-4 and 1-8
+      respectively.
+    </p>
+
+    <div class="row mb-2">
+      <div class="col-12 col-md-6">
+        <div class="flex ">
+          <span style="flex-basis: 5%"><i class="fa fa-check" aria-hidden="true"></i></span>
+
+          <p class="font-weight-500" style="flex-basis: 95%">
+            Each quiz will be a single session exam with 4 hrs to attempt 4 subjects, 3 hrs to attempt 3
+            subjects and 2 hrs to attempt 2 or 1 subject.
+          </p>
+        </div>
+
+        <div class="flex ">
+          <span style="flex-basis: 5%"><i class="fa fa-check" aria-hidden="true"></i></span>
+
+          <p class="font-weight-500" style="flex-basis: 95%">
+            The score of a quiz not attempted will be taken as 0. No make-up quiz will be provided.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6">
+        <div class="flex ">
+          <span style="flex-basis: 5%"><i class="fa fa-check" aria-hidden="true"></i></span>
+
+          <p class="font-weight-500" style="flex-basis: 95%">
+            It is mandatory to attend at least one of the 2 quizzes. Else, the learner will not be
+            eligible to write the final exam.
+          </p>
+        </div>
+
+        <div class="flex ">
+          <span style="flex-basis: 5%"><i class="fa fa-check" aria-hidden="true"></i></span>
+
+          <p class="font-weight-500" style="flex-basis: 95%">
+            The Qualifier Exam Score will be counted as Quiz 1 score for the courses registered in the
+            Foundation level only in the subsequent term of the Qualifier Exam.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="font-display text-xl">3. End Term Exam</p>
+
+    <div class="row mb-2">
+      <div class="col-12 col-md-6">
+        <div class="flex ">
+          <span style="flex-basis: 5%"><i class="fa fa-check" aria-hidden="true"></i></span>
+
+          <p class="font-weight-500" style="flex-basis: 95%">
+            At the end of a term, there will be an End Term Exam of 1.5 hours duration for each course.
+            (This will ensure exams can be conducted only on Sundays and exams for 4 courses completed
+            in 2 sessions of 3 hrs each throughout the program.)
+          </p>
+        </div>
+
+        <div class="flex ">
+          <span style="flex-basis: 5%"><i class="fa fa-check" aria-hidden="true"></i></span>
+
+          <p class="font-weight-500" style="flex-basis: 95%">
+            Eligibility to write the End Term Exam: Average weekly graded online assignment score &gt;=
+            40/100 AND learner has appeared for at least one out of the two invigilated quizzes.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6">
+        <div class="flex ">
+          <span style="flex-basis: 5%"><i class="fa fa-check" aria-hidden="true"></i></span>
+
+          <p class="font-weight-500" style="flex-basis: 95%">
+            If the above eligibility is not satisfied, the learner will not be allowed to write the End
+            Term Exam and will have to repeat the full course.
+          </p>
+        </div>
+
+        <div class="flex ">
+          <span style="flex-basis: 5%"><i class="fa fa-check" aria-hidden="true"></i></span>
+
+          <p class="font-weight-500" style="flex-basis: 95%">
+            The score obtained in the End Term Exam accounts for 50% of the Total Course Score T -
+            called End Term Score (E).
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="font-display text-xl">Pass criteria for each course</p>
+
+    <div class="w-100">
+      <div class="flex ">
+        <p class="entry-check"><i class="fa fa-check" aria-hidden="true"></i></p>
+
+        <p class="entry-content font-weight-500">
+          Total Course Score (T) = Average Quiz Score Q (out of 50) + End Term Score E (out of 50)
+        </p>
+      </div>
+
+      <div class="flex ">
+        <p class="entry-check"><i class="fa fa-check" aria-hidden="true"></i></p>
+
+        <p class="entry-content font-weight-500">
+          A candidate is deemed to have passed a course IF Total Course Score (T) &gt;= 50/100. <br>This
+          criteria is the same for all learners in the course.
+        </p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="px-8 max-w-5xl mx-auto my-8">
+  <div class="space-y-4">
+    <p id="AC10" class="font-display text-2xl">
+      Fee Structure
+    </p>
+
+    <div class="w-100">
+      <div class="flex ">
+        <p class="entry-check"><i class="fa fa-check" aria-hidden="true"></i></p>
+
+        <p class="entry-content font-weight-500">
+          For details about application fees, check <a href="admissions.html#AD5">Application Process</a> in Admissions
+          page.
+        </p>
+      </div>
+
+      <div class="flex ">
+        <p class="entry-check"><i class="fa fa-check" aria-hidden="true"></i></p>
+
+        <p class="entry-content font-weight-500">
+          <span class=font-display text-2xl style="font-size: 1.2rem">Each term, <u>pay only for the courses you
+              register
+              for in that specific term.</u>
+          </span>
+
+
+        </p>
+      </div>
+      <div class="flex">
+        <div class="entry-check"></div>
+
+        <table class="my-4 rounded overflow-hidden mx-auto ring-1 ring-zinc-300">
+          <thead class="">
+            <tr>
+              <th class="text-secondary italic p-4">Goal</th>
+
+              <th class="text-secondary italic p-4">Total Credits</th>
+
+              <th class="text-secondary italic p-4">Total Fees INR</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td class="px-4 py-2">Foundation Only</td>
+
+              <td class="px-4 py-2">32</td>
+
+              <td class="px-4 py-2">₹32,000</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-2">Foundation + One Diploma</td>
+
+              <td class="px-4 py-2">59</td>
+
+              <td class="px-4 py-2">₹94,500</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-2">Foundation + Two Diplomas</td>
+
+              <td class="px-4 py-2">86</td>
+
+              <td class="px-4 py-2">₹1,57,000</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-2">BSc Degree</td>
+
+              <td class="px-4 py-2">114</td>
+
+              <td class="px-4 py-2">₹2,21,000 - ₹2,27,000</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-2">BS Degree</td>
+
+              <td class="px-4 py-2">142</td>
+
+              <td class="px-4 py-2">₹3,15,000 - ₹3,51,000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="flex ">
+        <p class="entry-check"><i class="fa fa-check" aria-hidden="true"></i></p>
+
+        <p class="entry-content font-weight-500">The IITM BS program strives to secure scholarships from CSR and Alumni
+          donations for its students from socially and economically disadvantaged backgrounds to cover the full program
+          fees.</p>
+      </div>
+
+      <div class="flex ">
+        <p class="entry-check"><i class="fa fa-check" aria-hidden="true"></i></p>
+
+        <p class="entry-content font-weight-500">As intermittent support till such donations are secured, IIT Madras
+          covers part of the fees for the BS program students from socially and economically disadvantaged backgrounds.
+        </p>
+      </div>
+
+      <div class="flex ">
+        <p class="entry-check"><i class="fa fa-check" aria-hidden="true"></i></p>
+
+        <p class="entry-content font-weight-500">The&nbsp;fraction of IIT Madras' fee support depends on the learner's
+          category and&nbsp;family income and is given below:</p>
+      </div>
+    </div>
+
+    <!-- Fee structure custom table -->
+
+    <div class="space-y-4">
+      <div class="entry-check"></div>
+
+      <table class="my-4 rounded overflow-hidden mx-auto ring-1 ring-zinc-300">
+        <thead class="">
+          <tr>
+            <th rowspan="2"></th>
+
+            <th colspan="2" class="text-secondary italic p-1">Family Income &gt; 5 LPA</th>
+
+            <th colspan="2" class="text-secondary italic p-1">
+              Family Income &gt; 1 LPA and &lt;= 5 LPA
+            </th>
+
+            <th colspan="2" class="text-secondary italic p-1">Family Income &lt;= 1 LPA</th>
+          </tr>
+
+          <tr>
+            <th class="p-1 italic">Fee Support<br> from IIT Madras</th>
+
+            <th class="p-1 italic">Docs Required</th>
+
+            <th class="p-1 italic">Fee Support<br> from IIT Madras</th>
+
+            <th class="p-1 italic">Docs Required</th>
+
+            <th class="p-1 italic">Fee Support<br> from IIT Madras</th>
+
+            <th class="p-1 italic">Docs Required</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td class="text-secondary px-2 italic">General</td>
+
+            <td>N/A</td>
+
+            <td>NIL</td>
+
+            <td>50%</td>
+
+            <td>EWS + Family Income</td>
+
+            <td>75%</td>
+
+            <td>EWS + Family Income</td>
+          </tr>
+
+          <tr>
+            <td class="text-secondary px-2 italic">OBC</td>
+
+            <td>N/A</td>
+
+            <td>NIL</td>
+
+            <td>50%</td>
+
+            <td>OBC-NCL + Family Income</td>
+
+            <td>75%</td>
+
+            <td>OBC-NCL + Family Income</td>
+          </tr>
+
+          <tr>
+            <td class="text-secondary px-2 italic">SC / ST</td>
+
+            <td>50%</td>
+
+            <td>SC / ST</td>
+
+            <td>50%</td>
+
+            <td>SC / ST</td>
+
+            <td>75%</td>
+
+            <td>SC / ST + Family Income</td>
+          </tr>
+
+          <tr>
+            <td class="text-secondary px-2 italic">PwD</td>
+
+            <td>50%</td>
+
+            <td>PwD</td>
+
+            <td>50%</td>
+
+            <td>PwD</td>
+
+            <td>75%</td>
+
+            <td>PwD + EWS / OBC-NCL + Family Income</td>
+          </tr>
+
+          <tr>
+            <td class="text-secondary px-2 italic">SC / ST + PwD</td>
+
+            <td>75%</td>
+
+            <td>SC / ST + PwD</td>
+
+            <td>75%</td>
+
+            <td>SC / ST + PwD</td>
+
+            <td>75%</td>
+
+            <td>SC / ST + PwD</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>*IITM contribution does not apply to International students.</p>
+    </div>
+    <div class="flex ">
+      <p class="entry-check"><i class="fa fa-check" aria-hidden="true"></i></p>
+
+      <p class="entry-content font-weight-500">
+        The term <u>family income</u> for the purpose of availing IITM fee support includes the income of the candidate,
+        the income of
+        his/her parents and spouse, also the income of his/her siblings and children below the age of 18 years.<br>
+        <i>Family income certificate is not required while applying for the Degree program, but will be required to
+          avail IITM
+          fee support when joining the program.</i>
+        <a href="assets/pdf/Format_family_income_certificate.pdf" download="" target="_blank"><i>Download Family Income
+            Certificate format</i></a>
+      </p>
+    </div>
+
+    <div class="flex ">
+      <p class="entry-check"><i class="fa fa-check" aria-hidden="true"></i></p>
+
+      <p class="entry-content font-weight-500">
+        <!-- <span class="badge badge-secondary" style="color: white;"></span> -->
+
+        OBC-NCL / EWS certificate, if applicable, need to be obtained in following format while applying:<br><a
+          href="assets/pdf/Format_OBC_NCL.pdf" download="" target="_blank"><i>Download OBC-NCL Certificate
+            format</i></a><br><a href="assets/pdf/Format_EWS.pdf" download="" target="_blank"><i>Download EWS
+            Certificate format</i></a>
+      </p>
+    </div>
+
+    <div class="flex ">
+      <p class="entry-check"></p>
+
+      <p class="entry-content" id="goal"></p>
+    </div>
+
+    <div class="flex ">
+      <p class="entry-check"><i class="fa fa-check" aria-hidden="true"></i></p>
+
+      <p class="entry-content font-weight-500">
+        <i>Note: If a learner does not pass a course in the term they registered for, they will need to repeat the
+          entire
+          course in a later term with re-payment of full course fee. If a learner completed all course requirements, but
+          couldn't
+          attend the end term exam alone, they can choose to repeat just the end term exam in the next term with the
+          payment
+          of an end term exam fee (₹1000 for foundation level courses; ₹2000 for diploma / degree level courses).</i>
+      </p>
+    </div>
+  </div>
+</div>
+
+      <div class="bg-primary-700 pt-8 text-white lg:pb-2 pb-28">
+        <div class="px-8">
+          <div class="text-xl my-4">Contact Us</div>
+          <div class="grid grid-cols-1 gap-2 lg:grid-cols-3">
+            <div class="gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="size-6 inline">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+              </svg>
+              support@study.iitm.ac.in
+            </div>
+            <div class="lg:mx-auto gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="size-6 inline">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
+              </svg>
+              7850999966
+            </div>
+            <div class="gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="size-6 inline">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+              </svg>
+              IITM BS Degree Office, 3rd Floor, ICSR Building,
+              IIT Madras, Chennai - 600036
+            </div>
+          </div>
+          <div class="text-sm my-4">
+            Please use ONLY the above methods for any queries regarding the program. Our normal response time is 3
+            working days. It might take a little longer during busy periods. We will share Google Meet links during
+            such
+            periods. Due to the high volume of calls we receive every day, there might be long wait times. In some
+            cases, you might have to call multiple times to successfully connect to us.
+          </div>
+          <div class="flex my-4">
+            <div class="flex-1">
+              &copy; IIT Madras. All rights reserved.
+            </div>
+            <a href="#" class="hover:border-white border-b-2 border-transparent transition-all duration-200">
+              View sitemap
+            </a>
+          </div>
+        </div>
+
+        <div class="h-[0.075rem] bg-white"></div>
+        <div class="flex mx-8 my-4 items-center">
+          <div class="flex flex-1">
+            <div class="p-2">
+              <img src="/static/socials/facebook.svg" class="size-10" />
+            </div>
+            <div class="p-2">
+              <img src="/static/socials/instagram.svg" class="size-10" />
+            </div>
+            <div class="p-2">
+              <img src="/static/socials/twitter.svg" class="size-10" />
+            </div>
+            <div class="p-2">
+              <img src="/static/socials/linkedin.svg" class="size-10" />
+            </div>
+            <div class="p-2">
+              <img src="/static/socials/whatsapp.svg" class="size-10" />
+            </div>
+          </div>
+          <div class="p-2">
+            <a href="#">Privacy Policy</a>
+            |
+            <a href="#">Terms of Service</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  </div>
+</body>
+
+</html>
