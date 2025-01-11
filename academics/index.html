@@ -29,7 +29,7 @@
       shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)] lg:shadow-none
       " id="dock">
       <!-- menu trigger -->
-      <button id="menuOpen" class="flex-auto text-gray-700 justify-center flex items-center border-transparent hover:border-gray-300 border-2 px-4 rounded-lg gap-2
+      <button id="menuOpen" class="flex-auto text-gray-700 justify-center flex items-center border-transparent hover:border-gray-300 border-2 px-2 rounded-lg gap-2
       lg:scale-0 lg:absolute transition-translate duration-200
       ">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -38,23 +38,23 @@
         </svg>
       </button>
 
-      <div id="searchModal" class="flex gap-4 flex-row mx-2 justify-center lg:w-96">
+      <div id="searchModal" class="flex gap-2 flex-row mx-2 justify-center lg:w-96">
         <!-- search trigger -->
         <input id="search" class="border-2 absolute scale-0
         lg:static lg:scale-100 lg:flex-1
-        border-gray-300 p-4 rounded-lg
+        border-gray-300 px-2 py-4 rounded-lg
         transition-all duration-250" type="text" placeholder="Search"></input>
         <button id="searchCloseButton" class="
         lg:absolute lg:scale-0 text-gray-700
         scale-0 absolute border-transparent
-        hover:border-gray-300 border-2 px-4 py-auto rounded-lg transition-opacity gap-2 duration-500
+        hover:border-gray-300 border-2 px-2 py-auto rounded-lg transition-opacity gap-2 duration-500
       ">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
             stroke="currentColor" class="size-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
           </svg>
         </button>
-        <button id="searchButton" class="lg:flex-none flex-auto flex items-center justify-center text-gray-700 border-transparent hover:border-gray-300 border-2 px-4 py-auto rounded-lg transition-[translate] gap-2 duration-500
+        <button id="searchButton" class="lg:flex-none flex-auto flex items-center justify-center text-gray-700 border-transparent hover:border-gray-300 border-2 lg:px-4 px-2 py-auto rounded-lg transition-[translate] gap-2 duration-500
       ">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
             stroke="currentColor" class="size-6">
@@ -342,7 +342,7 @@
       </div>
 
     </div>
-    <div class="lg:col-span-6 lg:col-start-3">
+    <div class="lg:col-span-6 lg:col-start-3 overflow-x-hidden">
       <div class="ml-4 flex bg-primary-700 text-white p-4 flex-row gap-5 rounded-l-lg">
         <div class="flex flex-col flex-1">
           <div class="font-bold">
@@ -476,7 +476,7 @@
         <i class="fa fa-check"></i>
       </span>
 
-      <p style="flex-basis: 100%" class="">
+      <p>
         Each term of four months has 12 weeks of coursework (video lectures and assignments), 2 in-person
         invigilated
         Quizzes and End Term Exams. Depending on the course, assessments may include programming exams, mini
@@ -484,7 +484,7 @@
         vivas, take home assignments, etc.
       </p>
     </div>
-    <img src="/static/course_structure_web.png" class="max-w-md mx-auto">
+    <img src="/static/course_structure_web.png" class="my-2 w-auto lg:max-w-md mx-auto">
   </div>
 
 </div>
